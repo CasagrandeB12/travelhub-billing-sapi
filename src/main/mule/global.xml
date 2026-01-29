@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config
+		name="sapi-billing-httpListenerConfig">
+		<http:listener-connection host="0.0.0.0"
+			port="${secure::http.port}" />
+	</http:listener-config>
+	<apikit:config name="sapi-billing-config"
+		api="resource::859200e0-96c9-40c4-918e-b36c5d106407:sapi-billing:1.0.0:raml:zip:sapi-billing.raml"
+		outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="efad297c-5338-4812-a775-3a7b09d3caaa" >
+		<jms:active-mq-connection username="${secure::jms.billing.username}" password="${secure::jms.billing.password}" >
+			<jms:factory-configuration brokerUrl="${secure::jms.billing.broker}" />
+		</jms:active-mq-connection>
+	</jms:config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="607503be-6435-4f59-ad0c-e1b0f4fe78a3" file="${env}.yaml" key="${encrypt.key}" />
+
+
+</mule>

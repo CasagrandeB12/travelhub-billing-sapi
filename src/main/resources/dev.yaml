@@ -1,0 +1,7 @@
+http:
+  port: ${http.port}
+
+jms.billing:
+  broker: "tcp://localhost:61616"
+  username: "admin"
+  password: "![eAmWKA+iuIxFE60z+k5jAA==]"
