@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/sc
 			port="${secure::http.port}" />
 	</http:listener-config>
 	<apikit:config name="sapi-billing-config"
-		api="resource::859200e0-96c9-40c4-918e-b36c5d106407:sapi-billing:1.0.0:raml:zip:sapi-billing.raml"
+		api="resource::859200e0-96c9-40c4-918e-b36c5d106407:sapi-billing:1.0.2:raml:zip:sapi-billing.raml"
 		outboundHeadersMapName="outboundHeaders"
 		httpStatusVarName="httpStatus" />
 	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="efad297c-5338-4812-a775-3a7b09d3caaa" >
